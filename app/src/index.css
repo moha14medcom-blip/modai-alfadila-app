@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Themes — the 6 original themes (virtue, deep, light, stem,
+   midnight, cyber) driven by `data-theme` on <html>.
+   Values are RGB triplets so Tailwind can apply alpha.
+   ============================================================ */
+html[data-theme='virtue'] {
+  --c-bg: 18 16 27;
+  --c-surface: 27 24 39;
+  --c-surface-2: 36 32 52;
+  --c-line: 58 52 80;
+  --c-fg: 238 234 248;
+  --c-fg-muted: 158 150 184;
+  --c-primary: 139 92 246;
+  --c-on-primary: 255 255 255;
+  --c-gold: 245 190 74;
+  --c-good: 52 211 153;
+  --c-bad: 248 113 113;
+}
+
+html[data-theme='deep'] {
+  --c-bg: 9 12 20;
+  --c-surface: 16 21 33;
+  --c-surface-2: 23 30 46;
+  --c-line: 38 48 70;
+  --c-fg: 226 234 248;
+  --c-fg-muted: 138 152 178;
+  --c-primary: 56 132 255;
+  --c-on-primary: 255 255 255;
+  --c-gold: 236 186 92;
+  --c-good: 45 197 160;
+  --c-bad: 244 106 106;
+}
+
+html[data-theme='light'] {
+  --c-bg: 244 245 249;
+  --c-surface: 255 255 255;
+  --c-surface-2: 238 240 246;
+  --c-line: 216 220 230;
+  --c-fg: 26 28 38;
+  --c-fg-muted: 108 114 132;
+  --c-primary: 109 76 224;
+  --c-on-primary: 255 255 255;
+  --c-gold: 203 145 22;
+  --c-good: 22 163 116;
+  --c-bad: 220 68 68;
+}
+
+html[data-theme='stem'] {
+  --c-bg: 7 22 20;
+  --c-surface: 12 32 29;
+  --c-surface-2: 18 44 40;
+  --c-line: 32 66 60;
+  --c-fg: 226 246 241;
+  --c-fg-muted: 132 172 163;
+  --c-primary: 16 185 129;
+  --c-on-primary: 4 27 22;
+  --c-gold: 240 180 70;
+  --c-good: 34 197 150;
+  --c-bad: 240 110 110;
+}
+
+html[data-theme='midnight'] {
+  --c-bg: 11 12 24;
+  --c-surface: 19 20 38;
+  --c-surface-2: 26 28 52;
+  --c-line: 44 47 84;
+  --c-fg: 232 232 250;
+  --c-fg-muted: 150 152 190;
+  --c-primary: 99 102 241;
+  --c-on-primary: 255 255 255;
+  --c-gold: 232 180 88;
+  --c-good: 74 222 170;
+  --c-bad: 248 113 138;
+}
+
+html[data-theme='cyber'] {
+  --c-bg: 6 14 22;
+  --c-surface: 10 22 33;
+  --c-surface-2: 14 32 47;
+  --c-line: 26 58 78;
+  --c-fg: 219 247 255;
+  --c-fg-muted: 120 168 190;
+  --c-primary: 34 211 238;
+  --c-on-primary: 3 22 30;
+  --c-gold: 250 204 21;
+  --c-good: 34 197 94;
+  --c-bad: 244 63 94;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-fg));
+  font-family: Cairo, Tajawal, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--c-line)) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-line));
+  border-radius: 999px;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface p-4;
+  }
+  .card-2 {
+    @apply rounded-2xl border border-line bg-surface2 p-3;
+  }
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-bold transition active:scale-[.97] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-onprimary hover:brightness-110;
+  }
+  .btn-gold {
+    @apply btn bg-gold text-[rgb(28_20_4)] hover:brightness-105;
+  }
+  .btn-ghost {
+    @apply btn border border-line bg-surface2 text-fg hover:bg-surface;
+  }
+  .btn-danger {
+    @apply btn border border-bad/40 bg-bad/10 text-bad hover:bg-bad/20;
+  }
+  .btn-good {
+    @apply btn border border-good/40 bg-good/10 text-good hover:bg-good/20;
+  }
+  .input {
+    @apply w-full rounded-xl border border-line bg-surface2 px-3 py-2 text-sm text-fg outline-none placeholder:text-muted focus:border-primary;
+  }
+  .label {
+    @apply mb-1 block text-xs font-bold text-muted;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-line bg-surface2 px-2.5 py-1 text-[11px] font-bold text-muted;
+  }
+  .icon-btn {
+    @apply grid h-9 w-9 place-items-center rounded-xl border border-line bg-surface2 text-fg transition hover:bg-surface active:scale-95;
+  }
+  .title {
+    @apply text-lg font-black;
+  }
+  .muted {
+    @apply text-xs text-muted;
+  }
+}
+
+.ltr {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+.pulse {
+  animation: pulse-soft 1.6s ease-in-out infinite;
+}
